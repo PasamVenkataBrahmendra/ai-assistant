@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WOW AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h3>WOW AI</h3>
+    <ul class="feature-menu">
+      <li onclick="quickPrompt('Tell me a short, clean joke')">😄 Joke</li>
+      <li onclick="quickPrompt('Give me the current IST time')">⏰ Time</li>
+      <li onclick="setMode('chat')">👋 Chat</li>
+      <li onclick="openCodeAnalyzer()">💻 Debug Code</li>
+    </ul>
+
+    <div style="margin-top:16px;">
+      <label style="font-size:13px;color:#6b7280;">Personality</label>
+      <div class="persona-row">
+        <button id="friendly-btn" class="tag active" onclick="setPersonality('friendly')">Friendly</button>
+        <button id="professional-btn" class="tag" onclick="setPersonality('professional')">Professional</button>
+        <button id="quirky-btn" class="tag" onclick="setPersonality('quirky')">Quirky</button>
+        <button id="coder-btn" class="tag" onclick="setPersonality('coder')">Coder</button>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+  </aside>
+
+  <!-- Chatbot -->
+  <main class="chatbot">
+    <div class="chatbot-header">
+      <div class="ai-avatar">W</div>
+      <h2>WOW AI — Realtime</h2>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>Online</span>
+      </div>
+    </div>
+
+    <div class="chatbot-body" id="chatBody">
+      <div class="welcome-message">
+        <div class="ai-avatar-large">W</div>
+        <h3>Welcome to WOW AI! ✨</h3>
+        <p>Your intelligent assistant with advanced code debugging!</p>
+        <div class="quick-actions">
+          <button onclick="quickPrompt('Tell me a short, clean joke')">😄 Joke</button>
+          <button onclick="quickPrompt('Give me the current IST time')">⏰ Time</button>
+          <button onclick="setMode('chat')">👋 Chat</button>
+          <button onclick="openCodeAnalyzer()">💻 Debug Code</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chatbot-footer">
+      <form class="chat-form" id="chatForm">
+        <div class="input-container">
+          <textarea class="message-input" id="messageInput" placeholder="Type a message..."></textarea>
+          <div class="input-actions">
+            <button type="button" class="code-btn" id="codeBtn" title="Toggle coder mode">{</>}</button>
+            <button type="button" class="voice-btn" id="voiceBtn" title="Voice (placeholder)">🎙️</button>
+            <button type="submit" class="send-btn" title="Send">➤</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Student Tools Sidebar -->
+  <aside class="student-sidebar" id="studentSidebar">
+    <button class="close-student-btn" onclick="toggleStudentMode()">✕</button>
+    <h3>Student Tools</h3>
+    <p>Cheat-sheets and references will appear here.</p>
+  </aside>
+</div>
+
+<!-- Code Analyzer Modal -->
+<div id="codeAnalyzerModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Code Analyzer</h3>
+      <button class="close" onclick="closeCodeAnalyzer()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="code-input-section">
+        <label>Language</label>
+        <select id="languageSelect">
+          <option value="auto">Auto-detect</option>
+          <option>python</option>
+          <option>javascript</option>
+          <option>java</option>
+          <option>c</option>
+          <option>cpp</option>
+          <option>csharp</option>
+          <option>php</option>
+          <option>sql</option>
+          <option>html</option>
+          <option>css</option>
+        </select>
+      </div>
+
+      <div class="code-input-section" style="margin-top:12px;">
+        <label>Paste your code</label>
+        <textarea id="codeInput" placeholder="Paste code here..."></textarea>
+      </div>
+
+      <div class="analyzer-actions" style="margin-top:12px;">
+        <button class="analyze-btn" onclick="analyzeCode()">Analyze & Fix</button>
+        <button class="clear-btn" onclick="document.getElementById('codeInput').value=''">Clear</button>
+      </div>
+
+      <div id="analyzeResult" style="margin-top:16px;"></div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

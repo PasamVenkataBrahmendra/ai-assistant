@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup • WOW AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body class="auth">
+  <div class="auth-card">
+    <h2>Create Account</h2>
+    <form method="POST">
+      <label>Email</label>
+      <input type="email" name="email" required />
+
+      <label>Password</label>
+      <input type="password" name="password" required />
+
+      <label>Phone (optional)</label>
+      <input type="tel" name="phone" />
+
+      <button type="submit">Create</button>
+
+      <p class="muted">
+        Already have an account? <a href="/login">Log in</a>
+      </p>
+    </form>
+  </div>
+</body>
+</html>
